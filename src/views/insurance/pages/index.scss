@@ -1,0 +1,77 @@
+:where(.css-dev-only-do-not-override-98ntnt).ant-picker
+  .ant-picker-input
+  > input:placeholder-shown {
+  font-size: 24px !important;
+}
+
+:where(.css-dev-only-do-not-override-98ntnt).ant-picker
+  .ant-picker-input
+  > input {
+  font-size: 24px !important;
+}
+
+.anticon svg {
+  height: 30px !important;
+  width: 30px !important;
+}
+
+:where(.css-dev-only-do-not-override-98ntnt).ant-picker-outlined {
+  border-radius: 10px !important;
+}
+
+.ant-picker-date-panel {
+  width: 400px !important;
+}
+
+.ant-picker-header-view {
+  font-size: 25px !important;
+}
+
+.ant-picker-input input {
+  font: 25px !important;
+}
+
+.custom-input {
+  outline: none !important;
+  border: none !important;
+  padding: 0 !important;
+}
+
+.custom-input:hover {
+  border: none !important;
+}
+
+.ant-picker
+  .ant-picker-range
+  .ant-picker-outlined
+  css-dev-only-do-not-override-m4timi
+  .custom-input {
+  padding: 0 !important;
+}
+
+.anticon svg {
+  display: none !important;
+}
+
+
+
+.ant-picker-date-panel {
+  margin-right: 0 !important; /* Kalendar kunlari orasidagi masofani o'zgartirish */
+}
+
+
+.ant-calendar-month {
+  margin-right: 0 !important; /* Qatorlar orasidagi masofani yo'qotish */
+}
+
+
+
+
+.ant-picker-dropdown {
+  left: 132px !important;
+}
+
+
+.custom-input {
+  font-size: 14px !important; /* O'lchamni o'zgartiring */
+}

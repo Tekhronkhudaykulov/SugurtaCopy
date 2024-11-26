@@ -1,0 +1,29 @@
+.register-car-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.input-container {
+  display: grid;
+  grid-template-columns: 15% 1fr;
+  gap: 10px;
+}
+
+.diferrentClass {
+  width: 80px;
+  height: 40px !important;
+}
+
+.data {
+  transition: transform 0.5s ease, opacity 0.5s ease; /* Animatsiya */
+}
+
+.data.active-data {
+  transform: translateY(-150%); /* Tepaga 150% ga siljitish */
+  opacity: 0; /* O'chirish */
+}
+
+.second-active {
+  margin-top: -250px !important;
+}
