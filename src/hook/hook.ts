@@ -12,13 +12,12 @@ const useLoginMutation = () => {
   const { setErrorTitle } = usePostError();
 
   return useMutation({
-    mutationFn: async (inputs: { email: string; password: string }) => {
+    mutationFn: async (inputs: { login: string; password: string }) => {
       const { data } = await requests.postLoginClient({
-        email: inputs.email,
+        login: inputs.login,
         password: inputs.password,
       });
-
-      let token = data.data?.authorization?.token;
+      let token = data?.accessToken;
       setToken(token);
       return data;
     },
@@ -46,11 +45,11 @@ const usePostCompany = () => {
   return useMutation<PostCompanyParams>({
     mutationFn: async () => {
       const { data } = await requests.postCompany();
-      setServices(data.data.result);
+      setServices(data.result);
       return data;
     },
     onSuccess: () => {
-      navigate(APP_ROUTES.SERVICES);
+    navigate(APP_ROUTES.SERVICES)
     },
 
     onError: (error: any) => {
@@ -63,6 +62,8 @@ const usePostCompany = () => {
 
 const usePostServicesDetail = () => {
   const navigate = useNavigate();
+  const { setErrorTitle } = usePostError();
+
   // @ts-ignore
 
   const { setServiceDetail } = usePostStore();
@@ -70,7 +71,8 @@ const usePostServicesDetail = () => {
   return useMutation({
     mutationFn: async (company_id: any) => {
       const { data } = await requests.postCompanyDetail(company_id);
-      setServiceDetail(data.data.result);
+      setServiceDetail(data.result);
+      
       return data;
     },
     onSuccess: (data: any, variables: any) => {
@@ -79,7 +81,7 @@ const usePostServicesDetail = () => {
       navigate(`${APP_ROUTES.REGISTER_CAR}/${variables.company_id}`);
     },
     onError: (error: any) => {
-      console.error("Error during login:", error);
+        console.log(error, "erre")
     },
   });
 };
@@ -95,7 +97,7 @@ const stepOne = () => {
   return useMutation({
     mutationFn: async (payload: StepOne) => {
       const { data } = await requests.postStepOne(payload);
-      setStepOneData(data.data.result.data);
+      setStepOneData(data.result.data);
       return data;
     },
     onSuccess: () => {
@@ -114,15 +116,16 @@ const stepTwo = () => {
   // @ts-ignore
 
   const { setStepOneData } = stepOneStore();
+  const navigate = useNavigate()
 
   return useMutation({
     mutationFn: async (payload: StepOne) => {
       const { data } = await requests.postStepTwo(payload);
-      setStepOneData(data.data.result.data);
+      setStepOneData(data.result.data);
       return data;
     },
     onSuccess: () => {
-      // navigate(APP_ROUTES.DATA_CHECKING_CAR);
+      navigate(APP_ROUTES.INSURANCE)
     },
     onError: (error: any) => {
       if (error?.response) {

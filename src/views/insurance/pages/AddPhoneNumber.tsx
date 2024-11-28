@@ -5,7 +5,8 @@ import { FooterNav, KeyboardComponent, Text } from "../../../components";
 import { numericKeyboard } from "../../../components/Keyboard/typesKeyboars";
 import { useTranslation } from "react-i18next";
 
-const AddPhoneNumber = () => {
+
+const AddPhoneNumber = ({onClick, setTitle} : any) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [active, setActive] = useState(1);
@@ -16,27 +17,35 @@ const AddPhoneNumber = () => {
   const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     setPhone(value);
+    setTitle(value)
+  
 
     if (keyboard.current && inputName === "phone") {
       // @ts-ignore
       keyboard.current.setInput(value);
     }
+
   };
 
   const handleKeyPress = (button: string) => {
     if (button === "{bksp}") {
       const updatedValue = phone.slice(0, -1);
       setPhone(updatedValue);
+      setTitle(updatedValue)
+      console.log(updatedValue, "asfmas");
+      
       // @ts-ignore
 
       if (keyboard.current) keyboard.current.setInput(updatedValue);
     } else if (button !== "{shift}" && button !== "{lock}") {
       const updatedValue = phone + button;
       setPhone(updatedValue);
+      setTitle(updatedValue)
       // @ts-ignore
       if (keyboard.current) keyboard.current.setInput(updatedValue);
     }
   };
+
 
   return (
     <div className="flex flex-col h-full">
@@ -66,6 +75,7 @@ const AddPhoneNumber = () => {
             onFocus={(e: any) => {
               e.target.blur();
               setInputName("phone");
+              
             }}
             onChange={onChangeInput}
             maskChar={null}
@@ -88,7 +98,7 @@ const AddPhoneNumber = () => {
       />
 
       <div className="mt-[20px]">
-        <FooterNav prevClick={() => navigate(-1)} />
+        <FooterNav prevClick={() => navigate(-1)} nextClick={onClick}/>
       </div>
     </div>
   );

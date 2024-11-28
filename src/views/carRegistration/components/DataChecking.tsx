@@ -10,6 +10,9 @@ const DataChecking = () => {
   const navigate = useNavigate();
   // @ts-ignore
   const { stepOneData } = stepOneStore();
+
+  console.log(stepOneData, "sangjksn");
+  
   const { t } = useTranslation();
 
   return (
@@ -31,7 +34,7 @@ const DataChecking = () => {
           <div className="grid grid-cols-4 gap-x-[14px] mt-[15px]">
             <CheckingCard
               label={t("checkData.model")}
-              title={stepOneData?.vmodel}
+              title={stepOneData?.vehicle?.modelCustomName}
               className="bg-content rounded-[14px] px-[20px] pt-[20px] h-[140px]"
             />
             <CheckingCard
@@ -46,19 +49,19 @@ const DataChecking = () => {
             />
             <CheckingCard
               label={t("checkData.yearCard")}
-              title={stepOneData?.year}
+              title={stepOneData?.vehicle?.issueYear}
               className="bg-content rounded-[14px] px-[20px] pt-[20px] h-[140px] "
             />
           </div>
           <div className="grid grid-cols-2 gap-x-[14px]">
             <CheckingCard
               label={t("checkData.bodyNumber")}
-              title={stepOneData?.dvigatel}
+              title={stepOneData?.vehicle?.engineNumber}
               className="bg-content rounded-[14px] px-[20px] pt-[20px]  h-[140px]"
             />
             <CheckingCard
               label={t("checkData.VehicleNumber")}
-              title={stepOneData?.kuzov}
+              title={stepOneData?.vehicle?.bodyNumber}
               className="bg-content rounded-[14px]  px-[20px] pt-[20px] h-[140px] "
             />
           </div>

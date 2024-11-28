@@ -17,8 +17,6 @@ const RegisterCar = () => {
 
   const { t } = useTranslation();
 
-
-
   // @ts-ignore
   const { serviceDetail } = usePostStore();
 
@@ -27,6 +25,8 @@ const RegisterCar = () => {
   const { mutate, isPending, isError } = stepOne();
 
   const [singleObject] = Array.isArray(serviceDetail) ? serviceDetail : [];
+
+
 
   const [inputs, setInputs] = useState({});
   const [isActive, setIsActive] = useState(5);
@@ -104,19 +104,18 @@ const RegisterCar = () => {
   const handleClick = () => {
     mutate({
     // @ts-ignore
-
-      company_id: 1,
+      company_id: singleObject.service_id,
       service_id: singleObject.service_id,
       // @ts-ignore
-      texpsery: inputs.input2,
+      seria: inputs.input2,
       // @ts-ignore
-      texpnumber: inputs.input3,
+      number: inputs.input3,
       // @ts-ignore
-      renumber: inputs.input1,
+      govNumber: inputs.input1,
     });
   };
 
-  // Buttonni bosganda `company_id` uzatish
+
 
   return (
     <>

@@ -16,7 +16,7 @@ export const servicesQuery = () =>
     queryKey: ["services"],
     queryFn: async () => {
       const { data } = await requests.postCompany();
-      return data.data.result;
+      return data.result;
     },
   });
 

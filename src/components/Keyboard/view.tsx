@@ -27,7 +27,6 @@ const KeyboardComponent = ({
   ref,
 }: Props) => {
   const [layoutName, setLayoutName] = useState("default");
-  console.log(setLayoutName);
   
   const [buttonTheme, setButtonTheme] = useState<any>([]);
 

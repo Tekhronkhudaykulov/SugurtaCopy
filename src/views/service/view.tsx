@@ -9,6 +9,7 @@ import { useAuthRedirect } from "../../hook/view";
 import { usePostStore } from "../../store";
 import LoadingPage from "../../components/Loading/view";
 import { usePostServicesDetail } from "../../hook/hook";
+import { servicesQuery } from "../../common/queries";
 
 const Services = () => {
   const { t, i18n } = useTranslation();
@@ -18,6 +19,8 @@ const Services = () => {
   const value = usePostStore((state: any) => state.services);
 
   const { mutate: servicePost, isPending } = usePostServicesDetail();
+
+  const {data} = servicesQuery()
 
   const handleClick = (id: any) => {
     servicePost({ company_id: id });
@@ -104,23 +107,13 @@ const Services = () => {
           </div>
         </div>
         <div className="grid grid-cols-4">
-          {value?.map((item: any, ind: any) => (
+          {data?.map((item: any, ind: any) => (
             <div key={ind}>
               <ServicesCard
-                classNameButton={`${
-                  item.company_id === 1
-                    ? "bg-inson-button"
-                    : "bg-kapital-button "
-                } w-full mt-auto h-[65px]  text-[24px] rounded-[15px] font-[600] text-white`}
+                classNameButton={` w-full mt-auto h-[65px] bg-[black] text-[24px] rounded-[15px] font-[600] text-white`}
                 title={item.name}
-                className={`w-full  ${
-                  item.company_id === 1
-                    ? "card-gradient-inson"
-                    : "card-gradient-kapital"
-                } pb-[20px]`}
-                img={
-                  item.company_id === 1 ? ASSETS.InsonLogo : ASSETS.KapitalLogo
-                }
+                className={`w-full  card-gradient-kapital pb-[20px]`}
+                image={item?.image}
                 onClick={() => handleClick(item.company_id)}
               />
             </div>

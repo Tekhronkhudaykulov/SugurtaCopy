@@ -7,6 +7,7 @@ import stepsStore from "./steps/stepsSlice";
 import socketValueStore from "./socketResult/socketResultSlice";
 import { usePostStore } from "./usePostStore/usePostStore";
 import activeStore from "./active/activeSlice";
+import { otherStore } from "./other";
 
 export {
   clientAuthStore,
@@ -18,4 +19,5 @@ export {
   socketValueStore,
   usePostStore,
   activeStore,
+  otherStore
 };

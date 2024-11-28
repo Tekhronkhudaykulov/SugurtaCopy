@@ -3,6 +3,7 @@ import { SelectInsurance } from "../component/InsuranceInput";
 import { FooterNav, KeyboardComponent } from "../../../components";
 import { useNavigate } from "react-router-dom";
 import { APP_ROUTES } from "../../../router";
+import { stepOneStore } from "../../../store/usePostStore/usePostStore";
 
 const AddRelativesPerson = () => {
   const navigate = useNavigate();
@@ -16,6 +17,10 @@ const AddRelativesPerson = () => {
   const [inputName, setInputName] = useState("");
 
   const keyboard = useRef(null);
+
+
+ 
+
 
   // const onChangeAll = (inputs: any) => {
   //   // Ensure that `input1` length does not exceed 8 characters
@@ -102,6 +107,7 @@ const AddRelativesPerson = () => {
     return inputs[inputName] || "";
   };
 
+  
   return (
     <>
       <div className="flex flex-col ">

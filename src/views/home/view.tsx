@@ -7,6 +7,7 @@ import LoadingPage from "../../components/Loading/view";
 import Notification from "../../components/Notification/view";
 import { usePostError } from "../../store/usePostStore/usePostStore";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const { i18n } = useTranslation();
@@ -14,6 +15,8 @@ const Home = () => {
   const { mutate, isPending, isError } = usePostCompany();
 
   const { errorTitle } = usePostError();
+
+  const navigate = useNavigate()
 
   const list = [
     {
@@ -62,7 +65,7 @@ const Home = () => {
               key={idx}
               onClick={() => {
                 // @ts-ignore
-                handleSubmit(item.company_id);
+                navigate(APP_ROUTES.SERVICES)
                 changeLanguage(item.lng);
               }}
             />

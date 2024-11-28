@@ -6,11 +6,11 @@ import { $api } from "./api";
 export const requests = {
   // CLIENT AUTH
   postLoginClient: (params: LoginClientParamsType) =>
-    $api.post(`${API_URL}/login`, params),
+    $api.post(`${API_URL}/auth/login`, params),
   fetchClient: () => $api.post(`${API_URL}/me`),
 
   //get company and service
-  postCompany: () => $api.post(`${API_URL}/get-companies`),
+  postCompany: () => $api.get(`${API_URL}/partners/get-companies`),
   postCompanyDetail: (company_id: object) =>
     $api.post(`${API_URL}/get-company-services`, company_id),
 

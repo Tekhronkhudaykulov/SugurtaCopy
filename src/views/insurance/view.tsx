@@ -5,7 +5,6 @@ import { APP_ROUTES } from "../../router";
 import { useState } from "react";
 import "./pages/index.scss";
 import "antd/dist/reset.css";
-import { AddPhoneNumber } from "..";
 import { useTranslation } from "react-i18next";
 import { DatePicker, Space, Modal } from "antd";
 import moment from "moment";
@@ -30,20 +29,6 @@ const Insurance = () => {
 
   const { t } = useTranslation();
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
-
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
-
   const handleCalendarChange = (values: any) => {
     if (values && values[0]) {
       const startDate = values[0];
@@ -56,66 +41,10 @@ const Insurance = () => {
 
   return (
     <>
-      <Modal
-        footer={false}
-        open={isModalOpen}
-        onOk={handleOk}
-        onCancel={handleCancel}
-        width={900}
-      >
-        <AddPhoneNumber />
-      </Modal>
+ 
       <div className="flex flex-col">
         <div className="bg-[#F4F4F4] rounded-[20px] px-[25px] py-[15px]">
-          <div className="bg-white px-[25px] flex items-center gap-y-[10px]  py-[25px] rounded-[36px]">
-            <div>
-              <Text
-                text={t("phone")}
-                className="text-[20px] font-[500] mb-[15px]"
-              />
-              <div>
-                <div
-                  onClick={() => {
-                    setIsFocus(1);
-                    showModal();
-                  }}
-                  className={`${
-                    isFocuc === 1 && "focus-input"
-                  } flex items-center  gap-[20px] p-[10px] bg-[#F7F7F7] rounded-[22px] `}
-                >
-                  <div className="text-[25px] font-[500] border-r-[5px] border-[#E8E8E8] pr-[20px]">
-                    +998
-                  </div>
-                  <input
-                    className={`border-transparent bg-[#F7F7F7] !outline-none  text-[25px]  `}
-                    type="text"
-                  />
-                </div>
-              </div>
-              <label
-                id="my"
-                onClick={() => setIsFocus(2)}
-                className={`${
-                  isFocuc === 2 && "focus-input"
-                } flex items-center justify-between   gap-[20px] mt-[20px] py-[25px] px-[20px] bg-[#F7F7F7] rounded-[22px]`}
-              >
-                <label className="text-[25px] font-[500]">
-                  {t("insurance.howI")}
-                </label>
-
-                <input
-                  id="my"
-                  type="checkbox"
-                  className="ml-2 h-6 w-6 rounded border-gray-300 focus:ring-blue-500"
-                />
-              </label>
-            </div>
-            <div className="f w-[40%] mx-auto">
-              <p className=" text-center text-[20px] text-[red] ">
-                {t("insurance.titleSms")}
-              </p>
-            </div>
-          </div>
+         
           <div className="flex flex-col gap-y-[15px] mt-[15px]">
             <div className="grid grid-cols-3 items-center gap-x-[25px]">
               <div className="text-[20px] font-[700]">
