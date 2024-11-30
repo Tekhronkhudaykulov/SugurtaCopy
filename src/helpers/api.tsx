@@ -17,8 +17,6 @@ export const initApp = () => {
 };
 
 export const setToken = (token: any) => {
-  console.log(token, "token");
-
   localStorage.setItem(tokenName, token);
   $api.defaults.headers.common.Authorization = `Bearer ${token}`;
 };

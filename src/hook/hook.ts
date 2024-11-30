@@ -5,7 +5,7 @@ import { APP_ROUTES } from "../router";
 import { setToken } from "../helpers/api";
 import { usePostStore } from "../store";
 import { StepOne } from "../types/steps";
-import { stepOneStore, usePostError } from "../store/usePostStore/usePostStore";
+import {  stepOneAttributes, stepOneStore, usePostError } from "../store/usePostStore/usePostStore";
 
 const useLoginMutation = () => {
   const navigate = useNavigate();
@@ -90,12 +90,13 @@ const stepOne = () => {
   const { setErrorTitle } = usePostError();
   // @ts-ignore
 
-  const { setStepOneData } = stepOneStore();
+  const { setStepOneData ,clearStepOneData} = stepOneStore();
 
   const navigate = useNavigate();
 
   return useMutation({
     mutationFn: async (payload: StepOne) => {
+      
       const { data } = await requests.postStepOne(payload);
       setStepOneData(data.result.data);
       return data;
@@ -115,17 +116,45 @@ const stepTwo = () => {
   const { setErrorTitle } = usePostError();
   // @ts-ignore
 
-  const { setStepOneData } = stepOneStore();
+  const { setStepOneData,clearStepOneData } = stepOneStore();
+  const {setStepOneAttributesData} = stepOneAttributes()
   const navigate = useNavigate()
 
   return useMutation({
     mutationFn: async (payload: StepOne) => {
+      clearStepOneData()
       const { data } = await requests.postStepTwo(payload);
       setStepOneData(data.result.data);
+      setStepOneAttributesData(data.result.attributes)
       return data;
     },
     onSuccess: () => {
       navigate(APP_ROUTES.INSURANCE)
+    },
+    onError: (error: any) => {
+      if (error?.response) {
+        setErrorTitle(error.response.data.message);
+      }
+    },
+  });
+};
+
+const stepThree = () => {
+  const { setErrorTitle } = usePostError();
+  // @ts-ignore
+
+  const { setStepOneData,clearStepOneData } = stepOneStore();
+  const navigate = useNavigate()
+
+  return useMutation({
+    mutationFn: async (payload: StepOne) => {
+      clearStepOneData()
+      const { data } = await requests.postStepThree(payload);
+      setStepOneData(data.result.data);
+      return data;
+    },
+    onSuccess: () => {
+      navigate(APP_ROUTES.ADDRELATIVES)
     },
     onError: (error: any) => {
       if (error?.response) {
@@ -141,4 +170,5 @@ export {
   usePostServicesDetail,
   stepOne,
   stepTwo,
+  stepThree
 };

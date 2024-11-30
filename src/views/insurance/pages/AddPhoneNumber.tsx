@@ -32,7 +32,6 @@ const AddPhoneNumber = ({onClick, setTitle} : any) => {
       const updatedValue = phone.slice(0, -1);
       setPhone(updatedValue);
       setTitle(updatedValue)
-      console.log(updatedValue, "asfmas");
       
       // @ts-ignore
 
@@ -71,7 +70,7 @@ const AddPhoneNumber = ({onClick, setTitle} : any) => {
             name="phone"
             mask="99 999 99 99"
             className="text-[22px] p-0 h-[50px] !outline-none border-none !no-caret"
-            value={phone}
+            value={phone.slice(0, 9)}
             onFocus={(e: any) => {
               e.target.blur();
               setInputName("phone");

@@ -3,7 +3,10 @@ import { SelectInsurance } from "../component/InsuranceInput";
 import { FooterNav, KeyboardComponent } from "../../../components";
 import { useNavigate } from "react-router-dom";
 import { APP_ROUTES } from "../../../router";
-import { stepOneStore } from "../../../store/usePostStore/usePostStore";
+import { stepOneAttributes, stepOneStore, usePostError, usePostStore } from "../../../store/usePostStore/usePostStore";
+import { stepThree } from "../../../hook/hook";
+import Notification from "../../../components/Notification/view";
+import LoadingPage from "../../../components/Loading/view";
 
 const AddRelativesPerson = () => {
   const navigate = useNavigate();
@@ -11,16 +14,16 @@ const AddRelativesPerson = () => {
   const [inputs, setInputs] = useState({});
 
   const [layoutName, setLayoutName] = useState("default");
+
+  const {stepOneAttributesData} = stepOneAttributes();
+
+  const [formattedDate, setFormattedDate] = useState("");
+
   const [active, setActive] = useState(0);
-  console.log(layoutName);
 
   const [inputName, setInputName] = useState("");
 
   const keyboard = useRef(null);
-
-
- 
-
 
   // const onChangeAll = (inputs: any) => {
   //   // Ensure that `input1` length does not exceed 8 characters
@@ -34,6 +37,8 @@ const AddRelativesPerson = () => {
   //   setInputs({ ...inputs });
   // };
 
+
+ 
   const onChangeAll = (inputs: any) => {
     const updatedInputs = { ...inputs };
 
@@ -49,6 +54,8 @@ const AddRelativesPerson = () => {
         const month = updatedInputs.input1.slice(2, 4);
         const year = updatedInputs.input1.slice(4, 8);
         updatedInputs.input1 = `${day}.${month}.${year}`;
+        let birth = `${year}-${month}-${day}`
+        setFormattedDate(birth)
       }
     }
 
@@ -72,8 +79,8 @@ const AddRelativesPerson = () => {
   };
 
   const onChangeInput = (event: any) => {
-    const { name, value } = event.target;
 
+    const { name, value } = event.target;
     setInputs((prevInputs) => ({
       ...prevInputs,
       [name]: value,
@@ -107,12 +114,54 @@ const AddRelativesPerson = () => {
     return inputs[inputName] || "";
   };
 
+
+  const {mutate, isPending, isError} = stepThree();
+
+
+  const { serviceDetail } = usePostStore();
+
+  const { stepOneData } = stepOneStore();
+
+
+  
+
+  const { errorTitle } = usePostError();
+
+
+
+
+  const [singleObject] = Array.isArray(serviceDetail) ? serviceDetail : [];
+
+  const [relative, setRelative] = useState("")
+
+
+
+
+   
+  
+
+  const handleSend = () => {
+    mutate({
+      data: stepOneData,
+      company_id: singleObject.service_id,
+      service_id: singleObject.service_id,
+      seria: inputs.input2,
+      number: inputs.input3,
+      step_status: 1,
+      birthDate: formattedDate,
+      relative: Number(relative),
+      resident: 1,
+      step: 3
+    });
+  };
   
   return (
     <>
+      {isError && <Notification message={errorTitle} onClose="" />}
+      {isPending && <LoadingPage />}
       <div className="flex flex-col ">
         <div className="bg-grayCard py-[10px] gap-y-[15px] px-[25px] rounded-[30px] grid grid-cols-2 gap-x-[25px]">
-          <SelectInsurance />
+          <SelectInsurance data={stepOneAttributesData[1]} setRelative={setRelative}/>
           <div>
             <p className="!mb-[15px] text-[20px] font-[700]">Дата рождения</p>
             <input
@@ -161,7 +210,6 @@ const AddRelativesPerson = () => {
               placeholder="0 0 0 0 0 0 1"
               value={getInputValue("input3")}
               onFocus={(e: any) => {
-                console.log(e.target.value);
                 e.target.blur();
                 setInputName("input3");
                 setActive(3);
@@ -184,7 +232,8 @@ const AddRelativesPerson = () => {
         <FooterNav
           prevClick={() => navigate(-1)}
           nextClick={() =>
-            navigate(`${APP_ROUTES.PAYMENTTYPE}/${APP_ROUTES.SELECTCURRENCY}`)
+            // navigate(`${APP_ROUTES.PAYMENTTYPE}/${APP_ROUTES.SELECTCURRENCY}`)
+            handleSend()
           }
         />
       </div>

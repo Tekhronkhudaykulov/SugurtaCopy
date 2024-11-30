@@ -27,6 +27,7 @@ const KeyboardComponent = ({
   ref,
 }: Props) => {
   const [layoutName, setLayoutName] = useState("default");
+
   
   const [buttonTheme, setButtonTheme] = useState<any>([]);
 
@@ -77,7 +78,6 @@ const KeyboardComponent = ({
         inputName={inputName}
         layoutName={layoutName}
         layout={layout}
-        onRender={() => console.log(`Rendered`)}
         display={displayKeyboard}
         physicalKeyboardHighlight
         preventMouseDownDefault

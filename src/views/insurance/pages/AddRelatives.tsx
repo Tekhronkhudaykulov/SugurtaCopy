@@ -4,13 +4,17 @@ import { FooterNav } from "../../../components";
 import AddRelativesCard from "../component/AddRelativesCard";
 import InsuranceInfo from "../component/InsuranceInfo";
 import { APP_ROUTES } from "../../../router";
+import { stepOneStore } from "../../../store/usePostStore/usePostStore";
 
 const AddRelatives = () => {
   const navigate = useNavigate();
 
+
+  const { stepOneData } = stepOneStore();
+
   return (
     <div className="flex flex-col ">
-      <InsuranceInfo />
+      <InsuranceInfo data={stepOneData}/>
       <div className="mt-[10px] bg-[#F6F6F6] p-[15px] rounded-[35px]">
         <div className="flex items-center justify-between">
           <p className="text-[22px] font-[700]">Данные родственников:</p>
@@ -29,9 +33,10 @@ const AddRelatives = () => {
             </div>
           </div>
         </div>
-        <div className="grid grid-cols-2 gap-x-[15px] mt-[10px]">
-          <AddRelativesCard />
-          <AddRelativesCard />
+        <div className="grid grid-cols-3 gap-[15px] mt-[10px]">
+          {stepOneData?.drivers?.map((item: any, ind: any) => (
+            <AddRelativesCard person={item} ind={ind}/>
+          ))}
         </div>
       </div>
       <div className="mt-[-10px]">

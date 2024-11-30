@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { CheckingCardInput } from "../../../components/Cards";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FooterNav, KeyboardComponent, Text } from "../../../components";
 import { useNavigate } from "react-router-dom";
 import { APP_ROUTES } from "../../../router";
@@ -11,6 +11,10 @@ import LoadingPage from "../../../components/Loading/view";
 import { stepOneStore, usePostError } from "../../../store/usePostStore/usePostStore";
 import { Modal } from "antd";
 import { AddPhoneNumber } from "../..";
+import Keyboard from "react-simple-keyboard";
+import "react-simple-keyboard/build/css/index.css";
+import { FaBackspace } from "react-icons/fa";
+import { renderToStaticMarkup } from "react-dom/server";
 
 const AddDocument = () => {
   const { t } = useTranslation();
@@ -20,85 +24,21 @@ const AddDocument = () => {
 
   const [singleObject] = Array.isArray(serviceDetail) ? serviceDetail : [];
 
-  const keyboard = useRef(null);
-
   const navigate = useNavigate();
 
   const { errorTitle } = usePostError();
 
   const [isActive, setIsActive] = useState(0);
 
-  const [layoutName, setLayoutName] = useState("default");
-
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const [inputName, setInputName] = useState("");
 
-  const [inputs, setInputs] = useState({});
 
   const {mutate, isPending, isError} = stepTwo();
 
-  const [checkboxValue, setCheckBoxValue] = useState("")
-
-  const onChangeAll = (inputs: any) => {
-    // Ensure that `input1` length does not exceed 8 characters
-    if (inputs.input1 && inputs.input1.length > 2) {
-      inputs.input1 = inputs.input1.slice(0, 2); // Truncate to 8 characters
-    }
-    if (inputs.input2 && inputs.input2.length > 7) {
-      inputs.input2 = inputs.input2.slice(0, 7); // Truncate to 8 characters
-    }
-
-    setInputs({ ...inputs });
-  };
-
-  const handleShift = () => {
-    setLayoutName((prev) => (prev === "default" ? "shift" : "default"));
-  };
-
-  const onKeyPress = (button: any) => {
-    if (button === "{shift}" || button === "{lock}") handleShift();
-  };
-
-  const onChangeInput = (event: any) => {
-    const { name, value } = event.target;
-
-    setInputs((prevInputs) => ({
-      ...prevInputs,
-      [name]: value,
-    }));
-
-    // Ensure that keyboard input value is updated
-    if (keyboard.current && inputName === name) {
-      // @ts-ignore
-      keyboard.current.setInputs(value);
-    }
-  };
-
-  const handleKeyPress = (button: any) => {
-    // Handle backspace explicitly
-    if (button === "{bksp}") {
-      const currentValue = getInputValue(inputName);
-      const updatedValue = currentValue.slice(0, -1); // Remove last character
-      setInputs((prevInputs) => ({
-        ...prevInputs,
-        [inputName]: updatedValue,
-      }));
-      // @ts-ignore
-      if (keyboard.current) keyboard.current.setInput(updatedValue);
-    } else {
-      onKeyPress(button);
-    }
-  };
-
-  const getInputValue = (inputName: any) => {
-    // @ts-ignore
-    const value = inputs[inputName] || "";
-
-    return value;
-  };
 
   const handleClick = (index: any) => {
+
     setIsActive(index);
   };
 
@@ -123,20 +63,55 @@ const AddDocument = () => {
     setIsModalOpen(false);
   };
 
+
+
+  const [inputValue1, setInputValue1] = useState<string>("");
+  const [inputValue2, setInputValue2] = useState<string>("");
+
+  const [isChecked, setIsChecked] = useState("false");
+
+
+  const handleCheckboxChange = () => {
+    setIsChecked(isChecked === 'false' ? 'true' : 'false'); // String holatni teskari // Checkbox qiymatini teskari qilish
+  };
+
+  const handleChangeInput1 = (newInput: string) => {
+    setInputValue1(newInput);
+  };
+
+  // Input 2 uchun handleChange
+  const handleChangeInput2 = (newInput: string) => {
+    setInputValue2(newInput);
+  };
+
+
+  const handleKeyPressInputFirst = (button: string) => {
+    if (button === "{bksp}") {
+      setInputValue1(inputValue1.slice(0, -1)); // Input 1 uchun backspace
+    }
+  };
+
+  const handleKeyPressInputSecond = (button: string) => {
+    if (button === "{bksp}") {
+      setInputValue2(inputValue2.slice(0, -1)); // Input 2 uchun backspace
+    }
+  };
+
+
   const handleSend = () => {
     mutate({
-    // @ts-ignore
+      applicantIsOwner: isChecked,
+      phoneNumber: `998${value}`,
+      seria: inputValue1,
+      number: inputValue2,
+      driverNumberRestriction: isChecked,
+      data: stepOneData,
       company_id: singleObject.service_id,
       service_id: singleObject.service_id,
-      data: stepOneData,
-      // @ts-ignore
-      seria: inputs.input2,
-      // @ts-ignore
-      number: inputs.input3,
-      // @ts-ignore
-      govNumber: inputs.input1,
     });
   };
+
+  const backspaceIcon = renderToStaticMarkup(<FaBackspace size={50} color="#FF5252" />);
 
   return (
     <>
@@ -192,7 +167,8 @@ const AddDocument = () => {
                 <input
                   id="my"
                   type="checkbox"
-                  onChange={() => setCheckBoxValue("true")}
+                  checked={isChecked === 'true'}
+                  onChange={handleCheckboxChange}
                   className="ml-2 h-6 w-6 rounded border-gray-300 focus:ring-blue-500"
                 />
               </label>
@@ -209,12 +185,8 @@ const AddDocument = () => {
           className={`bg-white rounded-[14px] button-animation px-[20px] py-[10px] ${
             isActive === 2 ? "focus-input" : ""
           }`}
-          value={getInputValue("input1")}
-          onFocus={(e: any) => {
-            e.target.blur();
-            setInputName("input1");
-          }}
-          onChange={onChangeInput}
+          value={inputValue1}
+          onChange={(e) => handleChangeInput1(e.target.value)}
           handleClick={() => {
             handleClick(2);
           }}
@@ -225,12 +197,8 @@ const AddDocument = () => {
           className={`bg-white rounded-[14px] button-animation px-[20px] py-[10px] ${
             isActive === 3 ? "focus-input" : ""
           }`}
-          value={getInputValue("input2")}
-          onFocus={(e: any) => {
-            e.target.blur();
-            setInputName("input2");
-          }}
-          onChange={onChangeInput}
+          value={inputValue2}
+          onChange={(e) => handleChangeInput2(e.target.value)}
           handleClick={() => {
             handleClick(3);
           }}
@@ -238,18 +206,70 @@ const AddDocument = () => {
         />
       </div>
       <div className="mt-[25px]">
-        <KeyboardComponent
+        {/* <KeyboardComponent
           ref={(r: any) => (keyboard.current = r)}
           handleKeyPress={handleKeyPress}
           inputName={inputName}
           onChange={onChangeAll}
-        />
+        /> */}
+        {isActive === 2 && (
+            <Keyboard
+            value={inputValue1}  // Virtual klaviatura input qiymatini o'qiydi
+            onChange={handleChangeInput1} 
+            onKeyPress={handleKeyPressInputFirst}   // Klaviaturada bosilgan tugmalarni inputga uzatadi
+            layout={{
+              default: [
+                "Q W E R T Y U I O P",
+                "A S D F G H J K L",
+                "Z X C V B N M {bksp}",
+              ],
+              shift: [
+                "Q W E R T Y U I O P",
+                "A S D F G H J K L",
+                "{shift} Z X C V B N M {bksp}",
+                "{bksp}"
+              ]
+            }}
+            display={{
+              "{shift}": "Shift",
+              "{bksp}": backspaceIcon
+            }}
+          />
+        )}
+
+        {isActive === 3 && (
+           <Keyboard
+           value={inputValue2}
+           onChange={handleChangeInput2}
+           onKeyPress={handleKeyPressInputSecond}  
+
+           layout={{
+             default: [
+               "1 2 3 4 5 6 7 8 9 0",
+               "{bksp}"
+             ],
+             
+             
+           }}
+           display={{
+            "{shift}": "Shift",
+            "{bksp}": backspaceIcon
+          }}
+          buttonTheme={[
+            {
+              class: "custom-keyboard-btn", // Tailwind CSS sinfi
+              buttons: "1 2 3 4 5 6 7 8 9 0 {bksp}" // Stil beriladigan tugmalar
+            }
+          ]}
+         />
+        )}  
+    
       </div>
       <div>
         <FooterNav
           prevClick={() => navigate(-1)}
           nextClick={() => {
-            sendValue()
+            handleSend()
           }}
         />
       </div>

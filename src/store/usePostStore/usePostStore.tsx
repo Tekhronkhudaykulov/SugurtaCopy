@@ -25,8 +25,20 @@ export const stepOneStore = create(
     (set) => ({
       stepOneData: null,
       setStepOneData: (item: any) => set({ stepOneData: item }),
+      clearStepOneData: () => set({ stepOneData: null }), 
     }),
-    { name: "data" }
+    { name: "data",  }
+  )
+);
+
+
+export const stepOneAttributes = create(
+  persist(
+    (set) => ({
+      stepOneAttributesData: null,
+      setStepOneAttributesData: (item: any) => set({ stepOneAttributesData: item }),
+    }),
+    { name: "attributes",  }
   )
 );
 

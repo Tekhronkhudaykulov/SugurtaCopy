@@ -4,11 +4,14 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { useState } from "react";
 import "./index.scss";
 
-export const SelectInsurance = () => {
+export const SelectInsurance = ({data, setRelative}: any) => {
+  
   const [age, setAge] = useState("");
 
   const handleChange = (event: SelectChangeEvent) => {
+
     setAge(event.target.value);
+    setRelative(event.target.value)
   };
   return (
     <FormControl sx={{ m: 1, minWidth: 120 }}>
@@ -23,9 +26,9 @@ export const SelectInsurance = () => {
         className="!h-[60px] !text-[20px] !font-bold !bg-white !outline-none !rounded-[20px] !border-none"
         inputProps={{ "aria-label": "Without label" }}
       >
-        <MenuItem value={10}>Ten</MenuItem>
-        <MenuItem value={20}>Twenty</MenuItem>
-        <MenuItem value={30}>Thirty</MenuItem>
+        {data?.options?.map((item: any, ind: any) => (
+        <MenuItem value={item?.ID}>{item?.NAME}</MenuItem>
+        ))}
       </Select>
     </FormControl>
   );

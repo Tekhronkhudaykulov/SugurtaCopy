@@ -11,7 +11,6 @@ const DataChecking = () => {
   // @ts-ignore
   const { stepOneData } = stepOneStore();
 
-  console.log(stepOneData, "sangjksn");
   
   const { t } = useTranslation();
 

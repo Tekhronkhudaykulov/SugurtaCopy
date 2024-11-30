@@ -110,7 +110,7 @@ const Services = () => {
           {data?.map((item: any, ind: any) => (
             <div key={ind}>
               <ServicesCard
-                classNameButton={` w-full mt-auto h-[65px] bg-[black] text-[24px] rounded-[15px] font-[600] text-white`}
+                classNameButton={` w-full mt-auto h-[65px] bg-[#FBBA18] text-[24px] rounded-[15px] font-[600] text-white`}
                 title={item.name}
                 className={`w-full  card-gradient-kapital pb-[20px]`}
                 image={item?.image}

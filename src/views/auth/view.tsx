@@ -23,7 +23,6 @@ const Auth = () => {
   const [isHas, setIsHas] = useState(false);
 
   const [layoutName, setLayoutName] = useState("default");
-  console.log(layoutName);
 
   const [inputName, setInputName] = useState("");
 

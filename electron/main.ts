@@ -1,5 +1,4 @@
 import { app, BrowserWindow } from "electron";
-// @ts-ignore
 import path from "node:path";
 
 // ├─┬─┬ dist
@@ -18,7 +17,6 @@ let win: BrowserWindow | null;
 // 🚧 Use ['ENV_NAME'] avoid vite:define plugin - Vite@2.x
 const VITE_DEV_SERVER_URL = process.env["VITE_DEV_SERVER_URL"];
 
-// @ts-ignore
 
 function createWindow() {
   win = new BrowserWindow({
@@ -38,7 +36,6 @@ function createWindow() {
 
 
   win.webContents.on("did-finish-load", () => {
-    // @ts-ignore
     win.webContents.setZoomFactor(1); // Zoom ni 100% qilib o'rnatadi
   });
 

@@ -17,7 +17,7 @@ const RegisterCar = () => {
 
   const { t } = useTranslation();
 
-  // @ts-ignore
+      // @ts-ignore
   const { serviceDetail } = usePostStore();
 
   const { errorTitle } = usePostError();
@@ -32,7 +32,6 @@ const RegisterCar = () => {
   const [isActive, setIsActive] = useState(5);
 
   const [layoutName, setLayoutName] = useState("default");
-  console.log(layoutName);
 
   useAuthRedirect(`${APP_ROUTES.REGISTER_CAR}/${id}`);
 
@@ -95,7 +94,6 @@ const RegisterCar = () => {
   };
 
   const getInputValue = (inputName: any) => {
-    // @ts-ignore
     const value = inputs[inputName] || "";
 
     return value;
@@ -103,7 +101,6 @@ const RegisterCar = () => {
 
   const handleClick = () => {
     mutate({
-    // @ts-ignore
       company_id: singleObject.service_id,
       service_id: singleObject.service_id,
       // @ts-ignore
