@@ -212,10 +212,10 @@ const AddDocument = () => {
       </div>
       <div className="mt-[25px]">
         {/* <KeyboardComponent
-          ref={(r: any) => (keyboard.current = r)}
-          handleKeyPress={handleKeyPress}
-          inputName={inputName}
-          onChange={onChangeAll}
+          value={inputValue1}
+          handleKeyPress={(e) => handleChangeInput1(e)}
+          onChange={(e) => handleChangeInput1(e)}
+          
         /> */}
         {isActive === 2 && (
             <Keyboard

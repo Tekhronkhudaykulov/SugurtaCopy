@@ -83,8 +83,6 @@ const Insurance = () => {
     });
   };
 
-
-
   
   return (
     <>
@@ -93,7 +91,7 @@ const Insurance = () => {
 {isPending && <LoadingPage />}
  
       <InsuranceInfo/>
-      <div className="flex flex-col">
+      <div className="flex flex-col mt-[20px]">
         <div className="bg-[#F4F4F4] rounded-[20px] px-[25px] py-[15px]">
           <div className="flex flex-col gap-y-[15px] mt-[15px]">
             <div className="grid grid-cols-3 items-center gap-x-[25px]">

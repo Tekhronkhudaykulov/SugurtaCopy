@@ -24,8 +24,22 @@ export const stepOneStore = create(
   persist(
     (set) => ({
       stepOneData: null,
+      insuranceData: null,
       setStepOneData: (item: any) => set({ stepOneData: item }),
       clearStepOneData: () => set({ stepOneData: null }), 
+    }),
+    { name: "data",  }
+  )
+);
+
+
+export const insuranceValueStore = create(
+  persist(
+    (set) => ({
+
+      insuranceData: null,
+      setStepInsuranceData: (item: any) => set({ insuranceData: item}),
+      clearStepOneData: () => set({ insuranceData: null }), 
     }),
     { name: "data",  }
   )

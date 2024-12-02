@@ -5,7 +5,7 @@ import { APP_ROUTES } from "../router";
 import { setToken } from "../helpers/api";
 import { usePostStore } from "../store";
 import { StepOne } from "../types/steps";
-import {  stepOneAttributes, stepOneStore, usePostError } from "../store/usePostStore/usePostStore";
+import {  insuranceValueStore, stepOneAttributes, stepOneStore, usePostError } from "../store/usePostStore/usePostStore";
 
 const useLoginMutation = () => {
   const navigate = useNavigate();
@@ -115,7 +115,8 @@ const stepTwo = () => {
   // @ts-ignore
 
   const { setStepOneData,clearStepOneData } = stepOneStore();
-  const {setStepOneAttributesData} = stepOneAttributes()
+  const {setStepOneAttributesData} = stepOneAttributes();
+  const {setStepInsuranceData}  = insuranceValueStore()
   const navigate = useNavigate()
 
   return useMutation({
@@ -123,6 +124,7 @@ const stepTwo = () => {
       clearStepOneData()
       const { data } = await requests.postStepTwo(payload);
       setStepOneData(data.result.data);
+      setStepInsuranceData(data.result.data)
       setStepOneAttributesData(data.result.attributes)
       return data;
     },

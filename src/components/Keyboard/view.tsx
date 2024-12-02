@@ -14,6 +14,7 @@ interface Props {
   inputName?: string;
   ref?: any;
   handleKeyPress?: any;
+  value?: any
 }
 
 const KeyboardComponent = ({
@@ -25,6 +26,7 @@ const KeyboardComponent = ({
   onChange,
   inputName,
   ref,
+  value
 }: Props) => {
   const [layoutName, setLayoutName] = useState("default");
 
@@ -72,6 +74,7 @@ const KeyboardComponent = ({
     <div className={`${numeric && "numeric"} ${className}`}>
       <Keyboard
         keyboardRef={ref}
+        value={value}
         {...keyboardOptions}
         onChangeAll={onChange}
         onKeyPress={handleKeyPress}

@@ -1,10 +1,12 @@
 import { ASSETS } from "../../../assets/images/assets";
-import { stepOneStore } from "../../../store/usePostStore/usePostStore";
+import { insuranceValueStore, stepOneStore } from "../../../store/usePostStore/usePostStore";
 
 const InsuranceInfo = ({data} : any) => {
 
   const {stepOneData} = stepOneStore()
-  console.log(stepOneData, "data");
+
+  const {insuranceData} = insuranceValueStore()
+  console.log(insuranceData, "data");
   
 
   return (
@@ -19,11 +21,11 @@ const InsuranceInfo = ({data} : any) => {
       <div className="w-full">
         <div className="flex items-center justify-between mt-[10px]">
           <p className="text-[20px] font-[700]">Страховая компания:</p>
-          <p className="text-[20px] font-[700]">{stepOneData?.details?.insuredActivityType}</p>
+          <p className="text-[20px] font-[700]">{insuranceData?.details?.insuredActivityType}</p>
         </div>
         <div className="flex items-center justify-between mt-[10px]">
           <p className="text-[20px] font-[700]">Сумма покрытия:</p>
-          <p className="text-[20px] font-[700]">UZS {Number(stepOneData?.cost?.sumInsured)?.toLocaleString("ru-RU")}</p>
+          <p className="text-[20px] font-[700]">UZS {Number(insuranceData?.cost?.sumInsured)?.toLocaleString("ru-RU")}</p>
         </div>
         <div className="flex items-center justify-between mt-[10px]">
           <p className="text-[20px] font-[700]">Тип полиса:</p>
@@ -37,7 +39,7 @@ const InsuranceInfo = ({data} : any) => {
           <p className="text-[20px] font-[700]">
             Ваш номер телефона для уведомлений:
           </p>
-          <p className="text-[20px] font-[700]">+{stepOneData?.applicant?.person?.phoneNumber}</p>
+          <p className="text-[20px] font-[700]">+{insuranceData?.applicant?.person?.phoneNumber}</p>
         </div>
       </div>
     </div>
