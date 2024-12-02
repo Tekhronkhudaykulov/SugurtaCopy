@@ -161,7 +161,7 @@ const AddRelativesPerson = () => {
       {isPending && <LoadingPage />}
       <div className="flex flex-col ">
         <div className="bg-grayCard py-[10px] gap-y-[15px] px-[25px] rounded-[30px] grid grid-cols-2 gap-x-[25px]">
-          <SelectInsurance data={stepOneAttributesData[1]} setRelative={setRelative}/>
+          <SelectInsurance data={stepOneAttributesData?.[1]} setRelative={setRelative}/>
           <div>
             <p className="!mb-[15px] text-[20px] font-[700]">Дата рождения</p>
             <input

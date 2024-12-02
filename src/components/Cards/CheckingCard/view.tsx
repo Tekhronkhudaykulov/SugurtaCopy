@@ -9,6 +9,7 @@ interface CheckingCardType {
   value?: any;
   onFocus?: any;
   onChange?: any;
+  inputName?: string
 }
 
 const CheckingCard = ({ title, label, className }: CheckingCardType) => {
@@ -29,6 +30,7 @@ const CheckingCardInput = ({
   handleBlur,
   value,
   onFocus,
+  inputName,
   onChange,
 }: CheckingCardType) => {
   return (
@@ -43,6 +45,7 @@ const CheckingCardInput = ({
       </div>
       <input
         typeof="number"
+        name={inputName}
         className="text-[20px] w-full border-none font-[700] outline-none"
         type="text"
         value={value}

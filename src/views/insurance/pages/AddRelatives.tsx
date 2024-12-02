@@ -4,15 +4,38 @@ import { FooterNav } from "../../../components";
 import AddRelativesCard from "../component/AddRelativesCard";
 import InsuranceInfo from "../component/InsuranceInfo";
 import { APP_ROUTES } from "../../../router";
-import { stepOneStore } from "../../../store/usePostStore/usePostStore";
+import { stepOneStore, usePostError, usePostStore } from "../../../store/usePostStore/usePostStore";
+import { createInsuranceQuery } from "../../../hook/hook";
+import Notification from "../../../components/Notification/view";
+import LoadingPage from "../../../components/Loading/view";
 
 const AddRelatives = () => {
   const navigate = useNavigate();
 
-
+  const { serviceDetail } = usePostStore();
+  
   const { stepOneData } = stepOneStore();
 
+  const { errorTitle } = usePostError();
+
+
+  const {mutate, isPending, isError, isSuccess} = createInsuranceQuery();
+
+  const [singleObject] = Array.isArray(serviceDetail) ? serviceDetail : [];
+
+  const handleSend = () => {
+    mutate({
+      data: stepOneData,
+      company_id: singleObject.service_id,
+      service_id: singleObject.service_id,
+    });
+  };
+
   return (
+   <>
+   {isSuccess && <Notification message='"Sugurta shakllandi !' onClose="" />}
+    {isError && <Notification message={errorTitle} onClose="" />}
+    {isPending && <LoadingPage />}
     <div className="flex flex-col ">
       <InsuranceInfo data={stepOneData}/>
       <div className="mt-[10px] bg-[#F6F6F6] p-[15px] rounded-[35px]">
@@ -40,9 +63,12 @@ const AddRelatives = () => {
         </div>
       </div>
       <div className="mt-[-10px]">
-        <FooterNav prevClick={() => navigate(-1)} />
+        <FooterNav prevClick={() => navigate(-1)} nextClick={() => {
+handleSend()
+        }}/>
       </div>
     </div>
+    </>
   );
 };
 

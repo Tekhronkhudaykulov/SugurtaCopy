@@ -44,6 +44,9 @@ const AddDocument = () => {
 
   const [value, setValue] = useState("")
 
+  let formate = `${value?.slice(0, 2)} ${value?.slice(2, 5)} ${value?.slice(5, 7)} ${value?.slice(7)}`;
+
+
 
   const { stepOneData } = stepOneStore();
 
@@ -149,13 +152,15 @@ const AddDocument = () => {
                   <input
                     className={`border-transparent bg-[#F7F7F7] !outline-none  text-[25px]  `}
                     type="text"
-                    value={value}
+                    value={formate}
                   />
                 </div>
               </div>
               <label
                 id="my"
-                onClick={() =>  handleClick(1)}
+                onClick={() =>  {
+                  handleClick(1)
+                }}
                 className={`${
                   isActive === 1 ? "focus-input" : ""
                 } flex items-center justify-between   gap-[20px] mt-[20px] py-[25px] px-[20px] bg-[#F7F7F7] rounded-[22px]`}
@@ -234,6 +239,12 @@ const AddDocument = () => {
               "{shift}": "Shift",
               "{bksp}": backspaceIcon
             }}
+            buttonTheme={[
+              {
+                class: "custom-keyboard-btn", // Tailwind CSS sinfi
+                buttons: "1 2 3 4 5 6 7 8 9 0 {bksp}" // Stil beriladigan tugmalar
+              }
+            ]}
           />
         )}
 
@@ -246,7 +257,9 @@ const AddDocument = () => {
            layout={{
              default: [
                "1 2 3 4 5 6 7 8 9 0",
-               "{bksp}"
+               "Q W E R T Y U I O P",
+               "A S D F G H J K L",
+               "Z X C V B N M {bksp}",
              ],
              
              

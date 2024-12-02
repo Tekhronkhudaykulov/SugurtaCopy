@@ -22,6 +22,8 @@ const FooterNav = ({
 }: Props) => {
   const { t } = useTranslation();
 
+
+  
   return (
     <div className="flex items-center justify-center gap-3 py-4 mt-auto ">
       <button
@@ -34,7 +36,7 @@ const FooterNav = ({
         <button
           disabled={nextDisabled}
           onClick={nextClick}
-          className={`!bg-btnGreen rounded-[15px] button-animation  text-[24px] text-white   h-[70px]  uppercase w-[400px] ${
+          className={`!bg-btnGreen rounded-[15px] animate-grow button-animation  text-[24px] text-white   h-[70px]  uppercase w-[400px] ${
             nextDisabled && "opacity-50"
           }`}
         >

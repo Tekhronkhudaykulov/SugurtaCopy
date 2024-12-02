@@ -22,6 +22,8 @@ export const requests = {
   postStepTwo: (params: any) => $api.post(`${API_URL}/get-step-two`, params),
   postStepThree: (params: any) => $api.post(`${API_URL}/get-step-three`, params),
 
+  createInsurance: (params: any) => $api.post(`${API_URL}/create-insurance`, params),
+
 
   postEveryCash: (payload: any) =>
     $api.post(`${API_URL}/save-every-cash`, payload),

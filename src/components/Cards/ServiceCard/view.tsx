@@ -26,13 +26,13 @@ const ServicesCard = ({
       className={`flex flex-col pt-[20px] px-[24px] h-[280px] ${className} w-full   bg-card rounded-[36px]`}
     >
       <img  className="rounded-[20px]" src={`http://128.199.65.33/uploads/logo/${image}`} alt="" />
-      <p className="text-[20px] !mt-[20px] leading-[24px] font-[600]">
+      <p className="text-[20px] !my-[20px] leading-[24px] font-[600]">
         {title}
       </p>
       <button
         className={`${classNameButton} 
                transform  transition-transform duration-150 ease-in-out 
-               active:scale-90`}
+               active:scale-90 animate-grow`}
       >
         {t("home.cardButton")}
       </button>

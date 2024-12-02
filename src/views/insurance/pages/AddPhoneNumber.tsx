@@ -32,6 +32,7 @@ const AddPhoneNumber = ({onClick, setTitle} : any) => {
       const updatedValue = phone.slice(0, -1);
       setPhone(updatedValue);
       setTitle(updatedValue)
+      console.log(updatedValue, "asfmas");
       
       // @ts-ignore
 

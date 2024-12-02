@@ -9,20 +9,21 @@ import { useTranslation } from "react-i18next";
 import { DatePicker, Space, Modal } from "antd";
 import moment from "moment";
 import { stepOneAttributes, stepOneStore, usePostError, usePostStore } from "../../store/usePostStore/usePostStore";
-import { stepThree } from "../../hook/hook";
+import { stepThree, stepThreeInfinity } from "../../hook/hook";
 import Notification from "../../components/Notification/view";
 import LoadingPage from "../../components/Loading/view";
+import InsuranceInfo from "./component/InsuranceInfo";
 
 const { RangePicker } = DatePicker;
 
 const Insurance = () => {
   const navigate = useNavigate();
-  const [activeIndex, setActiveIndex] = useState<number>(0);
+  const [activeIndex, setActiveIndex] = useState<any>(null);
   const [activeYear, setActiveYear] = useState(0);
 
 
   
-  const [activePicker, setActivePicker] = useState(0);
+  const [activePicker, setActivePicker] = useState(1);
   const [dates, setDates] = useState<
     [moment.Moment | null, moment.Moment | null]
   >([null, null]);
@@ -61,7 +62,7 @@ const Insurance = () => {
 
   const [status, setStatus] = useState<any>(null)
 
-  const {mutate, isPending, isError} = stepThree();
+  const {mutate, isPending, isError} = stepThreeInfinity();
 
   const { errorTitle } = usePostError();
 
@@ -71,16 +72,19 @@ const Insurance = () => {
   const [singleObject] = Array.isArray(serviceDetail) ? serviceDetail : [];
 
 
-  // const handleSend = () => {
-  //   mutate({
-  //     data: stepOneData,
-  //     company_id: singleObject.service_id,
-  //     service_id: singleObject.service_id,
-  //     step_status: status,
-  //     resident: 1,
-  //     step: 3
-  //   });
-  // };
+  const handleSend = () => {
+    mutate({
+      data: stepOneData,
+      company_id: singleObject.service_id,
+      service_id: singleObject.service_id,
+      step_status: status,
+      resident: 1,
+      step: 3
+    });
+  };
+
+
+
   
   return (
     <>
@@ -88,9 +92,9 @@ const Insurance = () => {
 {isError && <Notification message={errorTitle} onClose="" />}
 {isPending && <LoadingPage />}
  
+      <InsuranceInfo/>
       <div className="flex flex-col">
         <div className="bg-[#F4F4F4] rounded-[20px] px-[25px] py-[15px]">
-         
           <div className="flex flex-col gap-y-[15px] mt-[15px]">
             <div className="grid grid-cols-3 items-center gap-x-[25px]">
               <div className="text-[20px] font-[700]">

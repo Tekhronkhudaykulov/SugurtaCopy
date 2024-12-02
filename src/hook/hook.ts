@@ -72,12 +72,10 @@ const usePostServicesDetail = () => {
     mutationFn: async (company_id: any) => {
       const { data } = await requests.postCompanyDetail(company_id);
       setServiceDetail(data.result);
-      
       return data;
     },
     onSuccess: (data: any, variables: any) => {
       console.log(data);
-
       navigate(`${APP_ROUTES.REGISTER_CAR}/${variables.company_id}`);
     },
     onError: (error: any) => {
@@ -153,8 +151,56 @@ const stepThree = () => {
       setStepOneData(data.result.data);
       return data;
     },
-    onSuccess: () => {
+    onSuccess: (res) => {
       navigate(APP_ROUTES.ADDRELATIVES)
+    },
+    onError: (error: any) => {
+      if (error?.response) {
+        setErrorTitle(error.response.data.message);
+      }
+    },
+  });
+};
+
+const stepThreeInfinity = () => {
+  const { setErrorTitle } = usePostError();
+  // @ts-ignore
+
+  const { setStepOneData,clearStepOneData } = stepOneStore();
+  const navigate = useNavigate()
+
+  return useMutation({
+    mutationFn: async (payload: StepOne) => {
+      clearStepOneData()
+      const { data } = await requests.postStepThree(payload);
+      setStepOneData(data.result.data);
+      return data;
+    },
+    onSuccess: () => {
+      navigate(APP_ROUTES.CASH)
+    },
+    onError: (error: any) => {
+      if (error?.response) {
+        setErrorTitle(error.response.data.message);
+      }
+    },
+  });
+};
+
+const createInsuranceQuery = () => {
+  const { setErrorTitle } = usePostError();
+  const {setStepOneData } = stepOneStore();
+
+  // @ts-ignore
+  const navigate = useNavigate();
+  return useMutation({
+    mutationFn: async (payload: StepOne) => {
+      const { data } = await requests.createInsurance(payload);
+     console.log(data, 'asfmklasn')
+      return data;
+    },
+    onSuccess: () => {
+      navigate(`${APP_ROUTES.PAYMENTTYPE}/${APP_ROUTES.CASH}`)
     },
     onError: (error: any) => {
       if (error?.response) {
@@ -170,5 +216,7 @@ export {
   usePostServicesDetail,
   stepOne,
   stepTwo,
-  stepThree
+  stepThree,
+  stepThreeInfinity,
+  createInsuranceQuery
 };

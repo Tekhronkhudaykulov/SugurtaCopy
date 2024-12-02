@@ -34,6 +34,15 @@ module.exports = {
         deleteBox: "#C82E2E",
         grayCard: "#F7F7F7",
       },
+      animation: {
+        grow: 'growShrink 1.5s ease-in-out infinite',
+      },
+      keyframes: {
+        growShrink: {
+          '0%, 100%': { transform: 'scale(1)' },
+          '50%': { transform: 'scale(1.1)' },
+        },
+      },
       borderRadius: {
         main: "11px",
         content: "36px",
