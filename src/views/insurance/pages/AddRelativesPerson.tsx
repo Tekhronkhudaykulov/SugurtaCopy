@@ -135,11 +135,6 @@ const AddRelativesPerson = () => {
   const [relative, setRelative] = useState("")
 
 
-
-
-   
-  
-
   const handleSend = () => {
     mutate({
       data: stepOneData,

@@ -11,6 +11,9 @@ const DataChecking = () => {
   // @ts-ignore
   const { stepOneData } = stepOneStore();
 
+
+
+
   
   const { t } = useTranslation();
 

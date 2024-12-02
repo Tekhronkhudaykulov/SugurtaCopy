@@ -49,7 +49,6 @@ const Insurance = () => {
 
   const { stepOneData } = stepOneStore();
 
-  const {stepOneAttributesData} = stepOneAttributes();
 
   useEffect(() => {
     if (stepOneData?.details?.startDate && stepOneData?.details?.endDate) {

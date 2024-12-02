@@ -88,13 +88,12 @@ const stepOne = () => {
   const { setErrorTitle } = usePostError();
   // @ts-ignore
 
-  const { setStepOneData ,clearStepOneData} = stepOneStore();
+  const { setStepOneData } = stepOneStore();
 
   const navigate = useNavigate();
 
   return useMutation({
     mutationFn: async (payload: StepOne) => {
-      
       const { data } = await requests.postStepOne(payload);
       setStepOneData(data.result.data);
       return data;
@@ -114,17 +113,15 @@ const stepTwo = () => {
   const { setErrorTitle } = usePostError();
   // @ts-ignore
 
-  const { setStepOneData,clearStepOneData } = stepOneStore();
+  const { setStepOneData } = stepOneStore();
   const {setStepOneAttributesData} = stepOneAttributes();
-  const {setStepInsuranceData}  = insuranceValueStore()
+ 
   const navigate = useNavigate()
 
   return useMutation({
     mutationFn: async (payload: StepOne) => {
-      clearStepOneData()
       const { data } = await requests.postStepTwo(payload);
       setStepOneData(data.result.data);
-      setStepInsuranceData(data.result.data)
       setStepOneAttributesData(data.result.attributes)
       return data;
     },
@@ -143,12 +140,11 @@ const stepThree = () => {
   const { setErrorTitle } = usePostError();
   // @ts-ignore
 
-  const { setStepOneData,clearStepOneData } = stepOneStore();
+  const { setStepOneData } = stepOneStore();
   const navigate = useNavigate()
 
   return useMutation({
     mutationFn: async (payload: StepOne) => {
-      clearStepOneData()
       const { data } = await requests.postStepThree(payload);
       setStepOneData(data.result.data);
       return data;
@@ -168,12 +164,11 @@ const stepThreeInfinity = () => {
   const { setErrorTitle } = usePostError();
   // @ts-ignore
 
-  const { setStepOneData,clearStepOneData } = stepOneStore();
+  const { setStepOneData } = stepOneStore();
   const navigate = useNavigate()
 
   return useMutation({
     mutationFn: async (payload: StepOne) => {
-      clearStepOneData()
       const { data } = await requests.postStepThree(payload);
       setStepOneData(data.result.data);
       return data;
@@ -191,7 +186,6 @@ const stepThreeInfinity = () => {
 
 const createInsuranceQuery = () => {
   const { setErrorTitle } = usePostError();
-  const {setStepOneData } = stepOneStore();
 
   // @ts-ignore
   const navigate = useNavigate();
