@@ -129,7 +129,7 @@ const AddDocument = () => {
       >
         <AddPhoneNumber onClick={handleCancel} setTitle={setValue}/>
       </Modal>
-         <div className="bg-content py-[10px] px-[24px] pt-[50px]">
+         <div className="bg-content py-[10px] px-[24px]">
          <div className="bg-white px-[25px] flex items-center gap-y-[10px]  py-[25px] rounded-[36px]">
             <div>
               <Text
@@ -184,7 +184,7 @@ const AddDocument = () => {
               </p>
             </div>
           </div>
-      <div className="grid grid-cols-3 gap-x-[15px] mt-[20px]">
+      <div className="grid grid-cols-3 gap-x-[15px] mt-[10px]">
         <CheckingCardInput
           label={t("passport.passportSeria")}
           className={`bg-white rounded-[14px] button-animation px-[20px] py-[10px] ${
