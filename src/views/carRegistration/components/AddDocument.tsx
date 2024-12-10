@@ -48,6 +48,7 @@ const AddDocument = () => {
 
 
 
+  // @ts-ignore
   const { stepOneData } = stepOneStore();
 
   const sendValue = () => {
@@ -103,6 +104,7 @@ const AddDocument = () => {
 
   const handleSend = () => {
     mutate({
+  // @ts-ignore
       applicantIsOwner: isChecked,
       phoneNumber: `998${value}`,
       seria: inputValue1,

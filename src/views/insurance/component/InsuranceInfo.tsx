@@ -3,6 +3,7 @@ import {  stepOneStore } from "../../../store/usePostStore/usePostStore";
 
 const InsuranceInfo = () => {
 
+  // @ts-ignore
   const {stepOneData} = stepOneStore();
 
   console.log(stepOneData, 'asnfkjas')

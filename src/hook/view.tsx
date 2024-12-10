@@ -5,6 +5,8 @@ import { APP_ROUTES } from "../router";
 import { Port } from "../config";
 import socketValueStore from "../store/socketResult/socketResultSlice";
 import axios from "axios";
+import { saveEveryCash } from "./hook";
+import { message } from "antd";
 
 export const useAuthRedirect = (redirectPath: string) => {
   const navigate = useNavigate();
@@ -105,6 +107,14 @@ export const OpenDevice = () => {
 export const CashDevice = () => {
   const { addValue } = socketValueStore();
 
+  const {mutate, isPending, isError} = saveEveryCash();
+
+
+
+
+
+  
+
   useEffect(() => {
     const socket = new WebSocket(Port);
 
@@ -120,13 +130,24 @@ export const CashDevice = () => {
       try {
         const message = JSON.parse(event.data);
         console.log("Received message:", message);
-
+        
         if (message.data === "REJECTED") {
           alert("Transaction rejected. The amount will not be added.");
           // Qo'shimcha ishlarni bajarish mumkin (masalan, to'lovni qayta ishlash)
         } else if (message.method === "READ" && message.data) {
           const valueObject = { id: Date.now(), amount: message.data };
+          console.log(message.data, "data");
+          mutate({amount: message.data})
           addValue(valueObject);
+        }else if (message.method === "TIMEOUT"){
+          socket.onopen = () => {
+            const openCommand = JSON.stringify({
+              device: "BILL_ACCEPTOR",
+              method: "OPEN",
+            });
+            socket.send(openCommand);
+          };
+      
         }
       } catch (error) {
         console.error("Error parsing message:", error);

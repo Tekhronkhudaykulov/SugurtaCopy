@@ -47,6 +47,7 @@ const Insurance = () => {
     }
   };
 
+  // @ts-ignore
   const { stepOneData } = stepOneStore();
 
 
@@ -64,6 +65,7 @@ const Insurance = () => {
   const {mutate, isPending, isError} = stepThreeInfinity();
 
   const { errorTitle } = usePostError();
+  // @ts-ignore
 
   const { serviceDetail } = usePostStore();
 
@@ -73,6 +75,7 @@ const Insurance = () => {
 
   const handleSend = () => {
     mutate({
+  // @ts-ignore
       data: stepOneData,
       company_id: singleObject.service_id,
       service_id: singleObject.service_id,
@@ -142,7 +145,7 @@ const Insurance = () => {
               >
                 <p className="text-[20px] font-[700]">{t("insurance.year")} </p>
                 <p className="text-[20px] font-[700] text-[#7076FF]">
-                  {stepOneData?.cost?.discountSum} сум
+                  {Number(stepOneData?.cost?.discountSum)?.toLocaleString("ru-Ru")} сум
                 </p>
               </div>
               {/* <div>
@@ -169,13 +172,13 @@ const Insurance = () => {
                 onClick={() => setActivePicker(1)}
                 className={`${
                   activePicker === 1 && "focus-input"
-                } h-[70px]  px-[25px] rounded-[15px]  bg-white flex items-center justify-between`}
+                } h-[70px]  px-[25px] rounded-[15px]  !bg-white flex items-center justify-between`}
               >
                 <Space direction="vertical" size={12}>
                   <RangePicker
                     disabled
                     placeholder={["Дата", "Дата"]}
-                    className="custom-input !bg-[none]"
+                    className="custom-input !bg-white"
                     onCalendarChange={handleCalendarChange}
                   
                     // @ts-ignore

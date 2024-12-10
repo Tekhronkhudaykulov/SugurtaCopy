@@ -25,8 +25,12 @@ const useLoginMutation = () => {
       navigate(APP_ROUTES.HOME);
     },
     onError: (error: any) => {
+      console.log(error, "error auth");
+      
       if (error?.response) {
         setErrorTitle(error.response.data.message);
+      }else if (error?.message){
+        setErrorTitle(error.message)
       }
     },
   });
@@ -114,6 +118,7 @@ const stepTwo = () => {
   // @ts-ignore
 
   const { setStepOneData } = stepOneStore();
+  // @ts-ignore
   const {setStepOneAttributesData} = stepOneAttributes();
  
   const navigate = useNavigate()
@@ -206,6 +211,30 @@ const createInsuranceQuery = () => {
   });
 };
 
+const saveEveryCash = () => {
+  const { setErrorTitle } = usePostError();
+  // @ts-ignore
+
+ 
+ 
+
+  return useMutation({
+    mutationFn: async (payload: StepOne) => {
+      const { data } = await requests.saveEveryCashFetch(payload);
+      console.log(data)
+      return data;
+    },
+    onSuccess: () => {
+      // navigate(APP_ROUTES.INSURANCE)
+    },
+    onError: (error: any) => {
+      if (error?.response) {
+        setErrorTitle(error.response.data.message);
+      }
+    },
+  });
+};
+
 export {
   useLoginMutation,
   usePostCompany,
@@ -214,5 +243,6 @@ export {
   stepTwo,
   stepThree,
   stepThreeInfinity,
-  createInsuranceQuery
+  createInsuranceQuery,
+  saveEveryCash
 };

@@ -36,7 +36,7 @@ function createWindow() {
 
 
   win.webContents.on("did-finish-load", () => {
-    win.webContents.setZoomFactor(1); // Zoom ni 100% qilib o'rnatadi
+    win?.webContents.setZoomFactor(1); // Zoom ni 100% qilib o'rnatadi
   });
 
  

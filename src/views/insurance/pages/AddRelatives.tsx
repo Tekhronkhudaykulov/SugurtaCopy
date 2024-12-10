@@ -12,8 +12,12 @@ import LoadingPage from "../../../components/Loading/view";
 const AddRelatives = () => {
   const navigate = useNavigate();
 
+  // @ts-ignore
+
   const { serviceDetail } = usePostStore();
   
+  // @ts-ignore
+
   const { stepOneData } = stepOneStore();
 
   const { errorTitle } = usePostError();
@@ -25,6 +29,7 @@ const AddRelatives = () => {
 
   const handleSend = () => {
     mutate({
+  // @ts-ignore
       data: stepOneData,
       company_id: singleObject.service_id,
       service_id: singleObject.service_id,
@@ -37,7 +42,9 @@ const AddRelatives = () => {
     {isError && <Notification message={errorTitle} onClose="" />}
     {isPending && <LoadingPage />}
     <div className="flex flex-col ">
-      <InsuranceInfo data={stepOneData}/>
+      <InsuranceInfo 
+  // @ts-ignore
+  data={stepOneData}/>
       <div className="mt-[10px] bg-[#F6F6F6] p-[15px] rounded-[35px]">
         <div className="flex items-center justify-between">
           <p className="text-[22px] font-[700]">Данные родственников:</p>

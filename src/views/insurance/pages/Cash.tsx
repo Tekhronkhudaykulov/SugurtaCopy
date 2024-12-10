@@ -3,23 +3,88 @@ import { ASSETS } from "../../../assets/images/assets";
 import { FooterNav, Text } from "../../../components";
 import { CashDevice } from "../../../hook/view";
 import { socketValueStore } from "../../../store";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import { API_URL } from "../../../config";
+import { API_URL, SocketUrl } from "../../../config";
+import PrintReceipt from "../../../components/CheckPrint/view";
+import { stepOneStore, usePostError } from "../../../store/usePostStore/usePostStore";
+import { io, Socket } from "socket.io-client";
+import { tokenName } from "../../../helpers/api";
+import { saveEveryCash } from "../../../hook/hook";
+import Notification from "../../../components/Notification/view";
+
+
+
 
 
 const Cash = () => {
   const { getTotal, values } = socketValueStore();
 
+  const { errorTitle } = usePostError();
+
+  const {mutate, isPending, isError} = saveEveryCash();
+
+
+
+  
+
+  // let token = localStorage.getItem(tokenName);
+
+  // const socket = io(SocketUrl, {
+  //   query: {
+  //     token: token, // Bearer tokenni shu yerda yuboring
+  //   },
+  // });
+
+  // let requestCount = 0;  // So'rovlar sanog'i
+
+
+  // console.log(requestCount, 'request count');
+  
+
+  // useEffect(() => {
+  //   if (socket) {
+  //     socket.connect();
+  //     console.log("socket connected");
+
+  //     socket.on("pay", () => {
+  //       console.log("connected to pay event");
+  //     });
+
+  //     // Intervalni o'rnatamiz
+  //     const interval = setInterval(() => {
+  //       requestCount += 1;
+
+  //       if (requestCount >= 5) {
+  //         console.log("Request count exceeded 5, reconnecting socket");
+  //         socket.disconnect();  // Socketni uzish
+  //         socket.connect();  // Yangi socket ulanishini amalga oshirish
+  //         requestCount = 0;  // So'rovlarni qayta sanash
+  //       }
+  //     }, 1000);  // Har 1 soniyada tekshirib turish
+
+  //     return () => {
+  //       clearInterval(interval); // Componentni tozalashda intervalni to'xtatish
+  //     };
+  //   }
+  // }, []);
 
 
   const total = getTotal();
 
+
   console.log(total, "total");
+
+
 
   CashDevice();
 
   console.log(values, "values");
+
+
+
+
+  
 
   const navigate = useNavigate();
 
@@ -53,8 +118,13 @@ const Cash = () => {
   };
 
 
+  const {stepOneData} = stepOneStore()
+
+  console.log(stepOneData, 'asnfkjas')
+
   return (
     <>
+      {isError && <Notification message={errorTitle} onClose="" />}
       <div className="flex justify-between gap-4  mt-[10px]">
         <div className="min-w-[620px]">
           <div className="flex items-center mb-[15px] px-[15px] py-[20px] border-[12px] border-purple rounded-[36px]">
@@ -63,7 +133,7 @@ const Cash = () => {
               className="text-[22px] font-[500]"
             />
             <Text
-              text="170 000 сум"
+              text={`${Number(stepOneData?.cost?.insurancePremium)?.toLocaleString("ru-RU")} сум`}
               className="ml-auto text-right text-[22px] font-[700]"
             />
           </div>
@@ -122,7 +192,7 @@ const Cash = () => {
           <img src={ASSETS.Money} className="mx-auto mt-[20px]" alt="" />
         </div>
       </div>
-      <button >Print "HELLO WORLD"</button>
+      <PrintReceipt/>
       <div>
         <FooterNav nextTitle="Оплатить" prevClick={() => navigate(-1)} />
       </div>

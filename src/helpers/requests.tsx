@@ -29,4 +29,7 @@ export const requests = {
     $api.post(`${API_URL}/save-every-cash`, payload),
 
   bannerFetch: () => $api.get(`${API_URL}/banners-list`),
+
+  saveEveryCashFetch: (params: any) => $api.post(`${API_URL}/save-cash`, params),
+
 };

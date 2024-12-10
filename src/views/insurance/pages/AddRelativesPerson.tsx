@@ -15,6 +15,7 @@ const AddRelativesPerson = () => {
 
   const [layoutName, setLayoutName] = useState("default");
 
+  // @ts-ignore
   const {stepOneAttributesData} = stepOneAttributes();
 
   const [formattedDate, setFormattedDate] = useState("");
@@ -118,7 +119,10 @@ const AddRelativesPerson = () => {
   const {mutate, isPending, isError} = stepThree();
 
 
+  // @ts-ignore
+
   const { serviceDetail } = usePostStore();
+  // @ts-ignore
 
   const { stepOneData } = stepOneStore();
 
@@ -137,10 +141,16 @@ const AddRelativesPerson = () => {
 
   const handleSend = () => {
     mutate({
+  // @ts-ignore
+
       data: stepOneData,
       company_id: singleObject.service_id,
       service_id: singleObject.service_id,
+  // @ts-ignore
+
       seria: inputs.input2,
+  // @ts-ignore
+
       number: inputs.input3,
       step_status: 1,
       birthDate: formattedDate,

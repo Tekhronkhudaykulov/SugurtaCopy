@@ -2,9 +2,11 @@ import { ASSETS } from "../../../assets/images/assets";
 import { stepOneAttributes, stepOneStore } from "../../../store/usePostStore/usePostStore";
 
 const AddRelativesCard = ({ person, ind }: any) => {
+  // @ts-ignore
   const { stepOneAttributesData } = stepOneAttributes();
   let relative = stepOneAttributesData[1];
 
+  // @ts-ignore
   const { stepOneData, setStepOneData } = stepOneStore();  // stepOneStore'dan ma'lumot olish
   const handleRemoveRelative = () => {
     // `drivers` ro'yxatidan o'chirilgan relative
