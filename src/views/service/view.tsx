@@ -36,7 +36,7 @@ const Services = () => {
       <div>
         <div className="bg-gradient-service absolute w-[100%] z-[-9999]  left-0"></div>
 
-        <div className="service-header-container  mx-[auto]">
+        <div className="service-header-container  mx-[auto] pt-[10px]">
           <div className="flex items-center justify-center">
             <img
               className="w-[380px] h-[230px] object-cover z-[9999]"

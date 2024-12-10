@@ -218,7 +218,7 @@ const RegisterCar = () => {
           </div>
         </div>
         <KeyboardComponent
-          className=" w-[85%] mx-auto !mt-[10px]"
+          className=" w-[100%] mx-auto !mt-[10px]"
           ref={(r: any) => (keyboard.current = r)}
           handleKeyPress={handleKeyPress}
           inputName={inputName}

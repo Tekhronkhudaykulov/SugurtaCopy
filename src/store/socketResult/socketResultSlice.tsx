@@ -16,6 +16,7 @@ const socketValueStore = create<State>((set, get) => ({
   addValue: (value) => set((state) => ({
     values: [...state.values, value],
   })),
+  clearValues: () => set({ values: [] }),
   getTotal: () => {
     const state = get(); // get() metodini chaqirish
     return state.values.reduce((acc, curr) => acc + curr.amount, 0);

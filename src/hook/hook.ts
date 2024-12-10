@@ -3,9 +3,9 @@ import { requests } from "../helpers/requests"; // Adjust the path to your reque
 import { useNavigate } from "react-router-dom";
 import { APP_ROUTES } from "../router";
 import { setToken } from "../helpers/api";
-import { usePostStore } from "../store";
+import { socketValueStore, usePostStore } from "../store";
 import { StepOne } from "../types/steps";
-import {  insuranceValueStore, stepOneAttributes, stepOneStore, usePostError } from "../store/usePostStore/usePostStore";
+import {  insuranceValueStore, setCash, stepOneAttributes, stepOneStore, usePostError } from "../store/usePostStore/usePostStore";
 
 const useLoginMutation = () => {
   const navigate = useNavigate();
@@ -192,6 +192,7 @@ const stepThreeInfinity = () => {
 const createInsuranceQuery = () => {
   const { setErrorTitle } = usePostError();
 
+
   // @ts-ignore
   const navigate = useNavigate();
   return useMutation({
@@ -213,15 +214,18 @@ const createInsuranceQuery = () => {
 
 const saveEveryCash = () => {
   const { setErrorTitle } = usePostError();
+
+  const {setEveryCash} = setCash()
+ 
+
   // @ts-ignore
 
- 
- 
-
   return useMutation({
-    mutationFn: async (payload: StepOne) => {
+    mutationFn: async (payload: any
+    ) => {
       const { data } = await requests.saveEveryCashFetch(payload);
-      console.log(data)
+      setEveryCash(data)
+      console.log(data, "cash")
       return data;
     },
     onSuccess: () => {
@@ -229,6 +233,33 @@ const saveEveryCash = () => {
     },
     onError: (error: any) => {
       if (error?.response) {
+        setErrorTitle(error.response.data.message);
+      }
+    },
+  });
+};
+
+const payByCash = () => {
+  const { setErrorTitle } = usePostError();
+
+  const {clearValues} = socketValueStore();
+
+
+  const navigate = useNavigate()
+
+  // @ts-ignore
+
+  return useMutation({
+    mutationFn: async () => {
+      const { data } = await requests.payByCashFetch();
+      return data;
+    },
+    onSuccess: () => {
+      clearValues()
+      navigate(APP_ROUTES.SUCCESS)
+    },
+    onError: (error: any) => {
+      if (error) {
         setErrorTitle(error.response.data.message);
       }
     },
@@ -244,5 +275,6 @@ export {
   stepThree,
   stepThreeInfinity,
   createInsuranceQuery,
-  saveEveryCash
+  saveEveryCash,
+  payByCash
 };

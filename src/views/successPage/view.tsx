@@ -4,9 +4,33 @@ import { Text } from "../../components";
 import { MailOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { APP_ROUTES } from "../../router";
+import axios from "axios";
+import { useState } from "react";
 
-const CheckPage = () => {
+const SuccessPage = () => {
   const navigate = useNavigate();
+
+  const [checkData, setCheckData] = useState({
+    transaction_no: '1',
+    card: 'Naqd',
+    payer: 'Xudaykulov Texron',
+    commission: '0',
+    payment_time: '2024-12-09 12:00',
+    amount: '5000 sum',
+    status: 'Muvaffaqiyatli',
+    qr_url: 'https://myinsurance.uz/',
+});
+
+const handlePrint = async () => {
+    try {
+        const response = await axios.post('http://192.168.100.100:5001/print-check', checkData);
+        navigate(APP_ROUTES.HOME)
+    } catch (error) {
+       console.log("Error printing check: " + error.response?.data?.message || error.message);
+       
+    }
+};
+
   return (
     <div className="flex flex-col h-full w-[65%] mx-auto pb-16">
       <img src={ASSETS.Success} className="h-[100px] object-contain" alt="" />
@@ -28,7 +52,10 @@ const CheckPage = () => {
           Нет (30)
         </Button>
         <Button
-          onClick={() => navigate(APP_ROUTES.CHECK)}
+          onClick={() => {
+            handlePrint();
+            navigate(APP_ROUTES.HOME)
+          }}
           className="!bg-btnGreen h-[65px]"
           type="primary"
         >
@@ -47,4 +74,4 @@ const CheckPage = () => {
   );
 };
 
-export default CheckPage;
+export default SuccessPage;

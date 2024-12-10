@@ -6,6 +6,12 @@ interface PostErrorState {
   setErrorTitle: (item: string | null) => void;
 }
 
+
+interface EveryCashState {
+  everyCash: string | null;
+  setEveryCash: (item: string | null) => void;
+}
+
 export const usePostStore = create(
   persist(
     (set) => ({
@@ -59,3 +65,10 @@ export const usePostError = create<PostErrorState>((set) => ({
   errorTitle: null,
   setErrorTitle: (item: any) => set({ errorTitle: item }),
 }));
+
+
+export const setCash = create<EveryCashState>((set) => ({
+  everyCash: null,
+  setEveryCash: (item: any) => set({ everyCash: item }),
+}));
+

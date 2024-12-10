@@ -8,6 +8,7 @@ import axios from "axios";
 import { saveEveryCash } from "./hook";
 import { message } from "antd";
 
+
 export const useAuthRedirect = (redirectPath: string) => {
   const navigate = useNavigate();
 
@@ -105,15 +106,9 @@ export const OpenDevice = () => {
 };
 
 export const CashDevice = () => {
-  const { addValue } = socketValueStore();
+  const { addValue, } = socketValueStore();
 
   const {mutate, isPending, isError} = saveEveryCash();
-
-
-
-
-
-  
 
   useEffect(() => {
     const socket = new WebSocket(Port);
@@ -125,6 +120,8 @@ export const CashDevice = () => {
       });
       socket.send(openCommand);
     };
+
+
 
     socket.onmessage = (event) => {
       try {
@@ -147,7 +144,6 @@ export const CashDevice = () => {
             });
             socket.send(openCommand);
           };
-      
         }
       } catch (error) {
         console.error("Error parsing message:", error);
@@ -165,3 +161,6 @@ export const CashDevice = () => {
     };
   }, [addValue]);
 };
+
+
+
