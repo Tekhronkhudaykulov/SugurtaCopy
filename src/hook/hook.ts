@@ -242,6 +242,8 @@ const saveEveryCash = () => {
 const payByCash = () => {
   const { setErrorTitle } = usePostError();
 
+
+  // @ts-ignore
   const {clearValues} = socketValueStore();
 
 

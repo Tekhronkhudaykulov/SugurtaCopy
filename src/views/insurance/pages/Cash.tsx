@@ -28,7 +28,11 @@ const Cash = () => {
 
   const {everyCash} = setCash();
 
+  // @ts-ignore
+
   const {stepOneData} = stepOneStore()
+  // @ts-ignore
+
 
   let refound = Number(everyCash?.amountInsurance) - Number(getTotalNum) || 0;
 

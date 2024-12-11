@@ -26,6 +26,7 @@ const handlePrint = async () => {
         const response = await axios.post('http://192.168.100.100:5001/print-check', checkData);
         navigate(APP_ROUTES.HOME)
     } catch (error) {
+      // @ts-ignore
        console.log("Error printing check: " + error.response?.data?.message || error.message);
        
     }
