@@ -5,7 +5,10 @@ import axios from "axios";
 
 export const $api = axios.create({
   baseURL: API_URL,
+
 });
+
+export const imageURl = "https://hasandev.uz"
 
 export const tokenName = "labbayPay";
 

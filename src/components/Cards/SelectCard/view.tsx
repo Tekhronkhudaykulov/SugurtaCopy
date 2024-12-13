@@ -4,7 +4,6 @@ interface Props {
   className?: string;
   onClick?: () => void;
   img?: string;
-  disabled: boolean;
   title: ReactNode | string;
 }
 
@@ -16,17 +15,15 @@ const disabledBlock = (
   </div>
 );
 
-const SelectCard = ({ className, onClick, img, disabled, title }: Props) => {
+const SelectCard = ({ className, onClick, img, title }: Props) => {
   return (
     <div
       onClick={onClick}
-      className={`flex flex-col relative pt-[20px] button-animation overflow-hidden ${className} ${
-        disabled && "disabled"
-      } bg-card rounded-[36px]`}
+      className={`flex flex-col relative pt-[20px] button-animation overflow-hidden ${className}  bg-card rounded-[36px]`}
     >
       <div className="text-[30px] text-center font-[700]">{title}</div>
       <img src={img} className="mt-auto text-right max-w-full" alt="" />
-      {disabled ? disabledBlock : null}
+     
     </div>
   );
 };

@@ -97,12 +97,7 @@ const Services = () => {
                 isHas={i18n.language === "ru"}
                 onClick={() => changeLanguage("ru")}
               />
-              <LanguageBtn
-                title="EN"
-                img={ASSETS.EngFlag}
-                isHas={i18n.language === "en"}
-                onClick={() => changeLanguage("en")}
-              />
+            
             </div>
           </div>
         </div>
