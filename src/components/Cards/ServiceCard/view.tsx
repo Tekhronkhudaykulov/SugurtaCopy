@@ -10,6 +10,9 @@ interface Props {
   item?: any
   title?: any,
   image?: string
+  imgClass?: string,
+  imgDivClass?: string,
+  buttonTitle? :string
 }
 
 const ServicesCard = ({
@@ -17,7 +20,11 @@ const ServicesCard = ({
   onClick,
   title,
   classNameButton,
-  image
+  image,
+  imgClass,
+  imgDivClass,
+  buttonTitle
+  
 }: Props) => {
   const { t } = useTranslation();
 
@@ -26,16 +33,18 @@ const ServicesCard = ({
       onClick={onClick}
       className={`flex flex-col pt-[20px] px-[24px] h-[280px] ${className} w-full   bg-card rounded-[36px]`}
     >
-      <img  className="rounded-[20px]" src={`${imageURl}/uploads/logo/${image}`} alt="" />
-      <p className="text-[20px] !my-[20px] leading-[24px] font-[600]">
-        {title}
+     <div className={imgDivClass}>
+     <img  className={`h-[99px] object-contain mb-[30px] ${imgClass}`} src={image} alt="" />
+     </div>
+     <p className="text-[20px]  leading-[24px] font-[600]">
+     {title}
       </p>
       <button
         className={`${classNameButton} 
                transform  transition-transform duration-150 ease-in-out 
                active:scale-90 animate-grow`}
       >
-        {t("home.cardButton")}
+        {buttonTitle}
       </button>
     </div>
   );

@@ -1,4 +1,4 @@
-import logoImage from "./Logo.svg";
+import logoImage from "./Logo.png";
 import checkImage from "./Check.svg";
 import cardImage from "./Card.png";
 import serviceImage from "./Service.png";
@@ -41,7 +41,6 @@ import Mib from "../../assets/images/mib.png";
 import BgGradientFoto from "../../assets/images/BgGradientFoto.png";
 import Down from "../images/chevron-down-outline 1.svg";
 import Info from "../images/1719711631233 1.png";
-
 import Money from "./Money.png";
 import Success from "./SuccessIcon.svg";
 import PrintAnimation from "./PrintAnimation.svg";
@@ -64,6 +63,7 @@ import SmsImage from "../images/SMSIMAGE.svg";
 import SmsImage2 from "../images/Frame 60.svg";
 import SmsImage3 from "../images/PHONE.svg";
 import Notification from "../images/notifications.svg";
+import MyInsurance from "../images/myinsurance.png"
 
 export const ASSETS = {
   logoImage,
@@ -131,4 +131,5 @@ export const ASSETS = {
   SmsImage2,
   SmsImage3,
   Notification,
+  MyInsurance
 };

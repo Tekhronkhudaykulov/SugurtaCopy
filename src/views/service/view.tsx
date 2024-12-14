@@ -101,18 +101,33 @@ const Services = () => {
             </div>
           </div>
         </div>
-        <div className="grid grid-cols-4">
-          {data?.map((item: any, ind: any) => (
-            <div key={ind}>
+        <div className="flex items-center justify-between gap-x-[20px]">
               <ServicesCard
-                classNameButton={` w-full mt-auto h-[65px] bg-[#FBBA18] text-[24px] rounded-[15px] font-[600] text-white`}
-                title={item.name}
-                className={`w-full  card-gradient-kapital pb-[20px]`}
-                image={item?.image}
-                onClick={() => handleClick(item.company_id)}
+                classNameButton={` w-full mt-auto h-[80px] bg-[#D2AE6D] text-[24px] rounded-[15px] font-[600] text-white`}
+                className={`w-[620px] max-w-[620px]  card-gradient-my-incurance pb-[20px]`}
+                image={ASSETS.MyInsurance}
+                imgClass="max-w-[240px] w-[240px] object-cover"
+                imgDivClass="flex items-center justify-center"
+                onClick={() => handleClick(3)}
+                title=" Работает на рынке Узбекистана с 2009 года, предоставляя надежные и качественные страховые услуги для физических и юридических лиц"
+                buttonTitle="ОФОРМИТЬ"
               />
-            </div>
-          ))}
+              <ServicesCard
+                classNameButton={` w-full mt-auto h-[80px] bg-[#CACACA] text-[24px] rounded-[15px] font-[600] text-white`}
+                className={`flex-1  card-gradient-inson pb-[20px]`}
+                image={ASSETS.InsonLogo}
+                title="Разработанно совместно с Канадской IT компанией - CROSURE"
+                buttonTitle="Скоро"
+
+              />
+              <ServicesCard
+                classNameButton={` w-full mt-auto h-[80px] bg-[#CACACA] text-[24px] rounded-[15px] font-[600] text-white`}
+                className={`flex-1 card-gradient-kapital  pb-[20px]`}
+                title="Быстрый расчет стоимости полиса. Простое оформление"
+                image={ASSETS.KapitalLogo}
+                buttonTitle="Скоро"
+
+              />
         </div>
       </div>
     </>

@@ -10,6 +10,7 @@ import LoadingPage from "../../components/Loading/view";
 import Notification from "../../components/Notification/view";
 import { usePostError } from "../../store/usePostStore/usePostStore";
 import { useTranslation } from "react-i18next";
+import { ASSETS } from "../../assets/images/assets";
 
 const RegisterCar = () => {
   const navigate = useNavigate();
@@ -160,7 +161,7 @@ const RegisterCar = () => {
                 >
                   <input
                     name="input2"
-                    className="px-[10px] h-[60px] border-none  text-[20px] w-full font-[500] outline-none text-[#E8E8E8] border rounded-[21px]"
+                    className="pl-[30px] h-[60px] border-none  text-[20px] w-full font-[500] outline-none text-[#E8E8E8] border rounded-[21px]"
                     type="text"
                     placeholder="AAF"
                     value={getInputValue("input2")}
@@ -194,26 +195,9 @@ const RegisterCar = () => {
               </div>
             </div>
           </div>
-          <div className="bg-[#F4F4F4] py-[10px]  px-[15px] rounded-[36px] ">
-            <div className="flex items-center justify-center">
-              {/* <img src={ASSETS.InsonLogo} alt="" /> */}
-              {singleObject && (
-                <p className="text-[30px] font-bold text-btnGreen">
-                  {singleObject.name}
-                </p>
-              )}
-            </div>
-            <div className="bg-white pt-[15px] pb-[12%] px-[15px] mt-[15px]  rounded-[30px]">
-              <div className="flex items-center justify-between">
-                <p className="text-[22px] font-[600]">ОСАГО:</p>
-                <p className="text-[22px] font-[600]">117 000 сум</p>
-              </div>
-              <div className="flex items-center justify-between mt-[15px]">
-                <p className="text-[22px] font-[600]">
-                  {t("serviceDetail.CoverageAmount")}:
-                </p>
-                <p className="text-[22px] font-[600]">117 000 сум</p>
-              </div>
+          <div className="bg-[#F4F4F4] py-[10px] flex items-center justify-center px-[15px] rounded-[36px] ">
+            <div className="  rounded-[30px]">
+             <img src={ASSETS.MyInsurance} alt="" />
             </div>
           </div>
         </div>

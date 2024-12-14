@@ -22,6 +22,7 @@ function createWindow() {
   win = new BrowserWindow({
     resizable: false,
     fullscreen: true,
+
     frame: false,
     icon: path.join(process.env.VITE_PUBLIC, "electron-vite.svg"),
 
